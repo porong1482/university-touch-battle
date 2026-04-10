@@ -242,6 +242,7 @@
 
         <div id="title-badge">🏅 칭호 없음</div>
 
+        <div style="font-size:13px; color:#ff9999; margin-bottom:6px;">총 터치: <span id="total-count">0</span>번</div>
         <div id="touch-area" onclick="handleTouch()">
             <img id="uni-logo" src="" alt="대학교 로고" style="display:none; width:130px; height:130px; object-fit:contain;">
             <div id="touch-emoji">🎓</div>
@@ -270,6 +271,8 @@
 
     <script>
         let myCount = 0;
+        let totalCount = 0;
+        let uniCounts = {};
         let selectedUniversity = "";
         let currentEmoji = "🎓";
         let myItems = [];
@@ -401,9 +404,9 @@
             const user = await res.json();
 
             currentUsername = user.username;
-            myCount = user.touch_count;
+            totalCount = user.touch_count;
             document.getElementById("user-info").textContent = "👤 " + user.username;
-            document.getElementById("my-count").textContent = myCount;
+            document.getElementById("my-count").textContent = 0;
 
             if (user.university) {
                 selectedUniversity = user.university;
@@ -441,8 +444,12 @@
     if (!selectedUniversity) { alert("대학교를 먼저 선택해주세요!"); return; }
 
     const point = isFever ? 2 : 1;
-    myCount += point;
+    totalCount += point;
+    if (!uniCounts[selectedUniversity]) uniCounts[selectedUniversity] = 0;
+    uniCounts[selectedUniversity] += point;
+    myCount = uniCounts[selectedUniversity];
     document.getElementById("my-count").textContent = myCount;
+    document.getElementById("total-count").textContent = totalCount;
 
     const area = document.getElementById("touch-area");
     area.style.background = isFever ? "#fff176" : "#fff0f0";
