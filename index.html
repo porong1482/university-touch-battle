@@ -114,6 +114,11 @@
             margin-bottom: 8px;
         }
         #touch-area:active { transform: scale(0.93) translateY(6px); box-shadow: 0 2px 0 #ffb3b3; }
+        #touch-area img {
+            width: 130px;
+            height: 130px;
+            object-fit: contain;
+        }
         #touch-emoji { font-size: 60px; line-height: 1; }
         #my-count { font-size: 32px; font-weight: bold; color: #ff6b6b; }
         #touch-label { font-size: 13px; color: #ffb3b3; }
@@ -238,7 +243,7 @@
         <div id="title-badge">🏅 칭호 없음</div>
 
         <div id="touch-area" onclick="handleTouch()">
-            <img id="uni-logo" src="" alt="대학교 로고" style="display:none; width:80px; height:80px; object-fit:contain;">
+            <img id="uni-logo" src="" alt="대학교 로고" style="display:none; width:130px; height:130px; object-fit:contain;">
             <div id="touch-emoji">🎓</div>
             <div id="my-count">0</div>
             <div id="touch-label">탭!</div>
@@ -421,11 +426,14 @@
             selectedUniversity = this.value;
             const logo = this.options[this.selectedIndex].getAttribute("data-logo");
             const imgEl = document.getElementById("uni-logo");
+            const emojiEl = document.getElementById("touch-emoji");
             if (logo) {
                 imgEl.src = logo;
                 imgEl.style.display = "block";
+                emojiEl.style.display = "none";
             } else {
                 imgEl.style.display = "none";
+                emojiEl.style.display = "block";
             }
         });
 
