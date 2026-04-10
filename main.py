@@ -8,6 +8,9 @@ from datetime import datetime, timedelta
 import aiosqlite
 
 app = FastAPI()
+from fastapi.staticfiles import StaticFiles
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 SECRET_KEY = "supersecretkey1234"
 ALGORITHM = "HS256"
