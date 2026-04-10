@@ -96,6 +96,7 @@ class RegisterData(BaseModel):
 
 class TouchData(BaseModel):
     university: str
+    point: int = 1
 
 
 class UpdateData(BaseModel):
@@ -153,10 +154,10 @@ async def touch(data: TouchData, current_user=Depends(get_current_user)):
     async with aiosqlite.connect(DB_PATH) as db:
         await db.execute(
             """
-            INSERT INTO touches (university, count) VALUES (?, 1)
-            ON CONFLICT(university) DO UPDATE SET count = count + 1
+            INSERT INTO touches (university, count) VALUES (?, ?)
+            ON CONFLICT(university) DO UPDATE SET count = count + ?
         """,
-            (data.university,),
+            (data.university, data.point, data.point),
         )
         await db.execute(
             """

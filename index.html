@@ -451,7 +451,7 @@
     await fetch("/touch", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
-        body: JSON.stringify({ university: selectedUniversity })
+        body: JSON.stringify({ university: selectedUniversity, point: isFever ? 2 : 1 })
     });
 
     // 피버 발동 확률 (1%)
