@@ -1,1 +1,1 @@
-web: . /app/.venv/bin/activate && uvicorn main:app --host 0.0.0.0 --port $PORT
+web: /mise/installs/python/3.13.13/bin/python -m uvicorn main:app --host 0.0.0.0 --port $PORT
