@@ -1,1 +1,1 @@
-web: /mise/installs/python/3.13.13/bin/python -m uvicorn main:app --host 0.0.0.0 --port $PORT
+web: pip install -r requirements.txt && uvicorn main:app --host 0.0.0.0 --port $PORT
